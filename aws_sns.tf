@@ -24,6 +24,14 @@ resource "aws_sns_topic_subscription" "cw_alarm_to_service_integration_cloudwatc
   endpoint_auto_confirms = true
 }
 
+# Global Orchestration
+resource "aws_sns_topic_subscription" "cw_alarm_to_global_orchestration" {
+  topic_arn              = module.sns_topic_cw_alarm.arn
+  protocol               = "https"
+  endpoint               = "${var.pagerduty_global_integration_url}${module.global_orchestration_cw_alarm.result.integration_key}"
+  endpoint_auto_confirms = true
+}
+
 ##########
 # EventBridge
 ##########
