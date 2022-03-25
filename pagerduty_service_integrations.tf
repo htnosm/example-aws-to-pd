@@ -67,3 +67,12 @@ module "pagerduty_service_integration_custom_event_transfer_v2" {
   integration_name = "Custom Event Transformer(v2)"
   source_code_path = "modules/pagerduty-service-custom-event-transfer/templates/default.v2.js"
 }
+
+module "pagerduty_service_integration_custom_event_transfer_sns" {
+  source           = "./modules/pagerduty-service-custom-event-transfer"
+  service_id       = pagerduty_service.example.id
+  pagerduty_token  = var.pagerduty_token
+  debug_mode       = true
+  integration_name = "Custom Event Transformer(SNS)"
+  source_code_path = "modules/pagerduty-service-custom-event-transfer/templates/amazon_sns.js"
+}

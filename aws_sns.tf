@@ -69,3 +69,9 @@ resource "aws_sns_topic_subscription" "eventbridge_to_integration_custom_event_t
   endpoint               = module.pagerduty_service_integration_custom_event_transfer_v2.integration_url
   endpoint_auto_confirms = false
 }
+resource "aws_sns_topic_subscription" "eventbridge_to_integration_custom_event_transfer_sns" {
+  topic_arn              = module.sns_topic_eventbridge.arn
+  protocol               = "https"
+  endpoint               = module.pagerduty_service_integration_custom_event_transfer_sns.integration_url
+  endpoint_auto_confirms = false
+}
