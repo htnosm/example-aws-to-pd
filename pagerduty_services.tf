@@ -2,6 +2,11 @@ data "pagerduty_escalation_policy" "example" {
   name = var.pagerduty_escalation_policy_name
 }
 
+locals {
+  pagerduty_html_url     = replace(pagerduty_service.example.html_url, "/\\/service-directory\\/.*/", "")
+  pagerduty_email_domain = replace(local.pagerduty_html_url, "https://", "")
+}
+
 resource "pagerduty_service" "example" {
   name                    = var.resource_prefix
   description             = "Managed by Terraform"

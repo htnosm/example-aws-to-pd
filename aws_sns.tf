@@ -41,3 +41,31 @@ module "sns_topic_eventbridge" {
   name        = "${var.resource_prefix}-eventbridge"
   identifiers = ["events.amazonaws.com"]
 }
+
+# Service Integration "Email"
+resource "aws_sns_topic_subscription" "eventbridge_to_integration_email" {
+  topic_arn              = module.sns_topic_eventbridge.arn
+  protocol               = "email"
+  endpoint               = pagerduty_service_integration.email.integration_email
+  endpoint_auto_confirms = false
+}
+resource "aws_sns_topic_subscription" "eventbridge_to_integration_email_json" {
+  topic_arn              = module.sns_topic_eventbridge.arn
+  protocol               = "email-json"
+  endpoint               = pagerduty_service_integration.email_json.integration_email
+  endpoint_auto_confirms = false
+}
+
+# Service Integration "Custom Event Transformer"
+resource "aws_sns_topic_subscription" "eventbridge_to_integration_custom_event_transfer" {
+  topic_arn              = module.sns_topic_eventbridge.arn
+  protocol               = "https"
+  endpoint               = module.pagerduty_service_integration_custom_event_transfer.integration_url
+  endpoint_auto_confirms = false
+}
+resource "aws_sns_topic_subscription" "eventbridge_to_integration_custom_event_transfer_v2" {
+  topic_arn              = module.sns_topic_eventbridge.arn
+  protocol               = "https"
+  endpoint               = module.pagerduty_service_integration_custom_event_transfer_v2.integration_url
+  endpoint_auto_confirms = false
+}

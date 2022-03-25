@@ -1,0 +1,30 @@
+{
+    "config": {
+        "fields": {
+            "code": {
+                "type": "code",
+                "required": false,
+                "label": "The code you want to execute.",
+                "value": "${code}",
+                "ui_order": 0
+            },
+            "debug": {
+                "type": "select",
+                "required": false,
+                "label": "Debug mode (send an event to your service if code produces errors)",
+                "valid_values": {
+                "debug_on": {
+                    "label": "Enabled",
+                    "ui_order": 1
+                },
+                "debug_off": {
+                    "label": "Disabled",
+                    "ui_order": 2
+                }
+                },
+                "value": "${debug}",
+                "ui_order": 1
+            }
+        }
+    }
+}
