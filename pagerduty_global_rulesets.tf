@@ -24,7 +24,7 @@ resource "pagerduty_ruleset_rule" "global_cw_alarm" {
 
   actions {
     route {
-      value = pagerduty_service.example_ni.id
+      value = pagerduty_service.example_rulesets.id
     }
     severity {
       value = "info"
