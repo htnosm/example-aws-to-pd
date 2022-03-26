@@ -1,18 +1,23 @@
-module "global_orchestration_cw_alarm" {
+module "global_orchestration" {
   source = "./modules/pagerduty-global-orchestration"
 
   pagerduty_token = var.pagerduty_token
 
-  name        = "${var.resource_prefix}-cw-alarm"
+  name        = var.resource_prefix
   description = "Managed by Terraform"
 
   rules = [
     {
       label = null,
       conditions = [
+        # CloudWatch Metric Alarm
         {
           expression = "raw_event.TopicArn matches '${module.sns_topic_cw_alarm.arn}'",
-        }
+        },
+        # EventBridge
+        {
+          expression = "raw_event.TopicArn matches '${module.sns_topic_eventbridge.arn}'",
+        },
       ]
       actions = {
         route_to = pagerduty_service.example_orchestration.id
@@ -21,6 +26,6 @@ module "global_orchestration_cw_alarm" {
   ]
 }
 
-output "global_orchestration_cw_alarm_html_url" {
-  value = module.global_orchestration_cw_alarm.result.html_url
+output "global_orchestration_html_url" {
+  value = module.global_orchestration.result.html_url
 }

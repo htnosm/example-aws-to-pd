@@ -39,8 +39,6 @@ provider "aws" {
   }
 }
 
-/*
-# Configure the AWS Provider
 data "aws_caller_identity" "current" {}
 
 data "aws_region" "current" {}
@@ -52,4 +50,3 @@ output "aws_account_id" {
 output "aws_region" {
   value = data.aws_region.current.name
 }
-*/

@@ -31,3 +31,28 @@ resource "pagerduty_ruleset_rule" "global_cw_alarm" {
     }
   }
 }
+
+resource "pagerduty_ruleset_rule" "global_eventbridge" {
+  ruleset  = local.ruleset_slug
+  disabled = "false"
+
+  conditions {
+    operator = "and"
+    subconditions {
+      operator = "equals"
+      parameter {
+        path  = "TopicArn"
+        value = module.sns_topic_eventbridge.arn
+      }
+    }
+  }
+
+  actions {
+    route {
+      value = pagerduty_service.example_rulesets.id
+    }
+    severity {
+      value = "info"
+    }
+  }
+}

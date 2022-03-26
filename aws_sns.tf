@@ -16,19 +16,19 @@ resource "aws_sns_topic_subscription" "cw_alarm_to_global_ruleset" {
   endpoint_auto_confirms = true
 }
 
+# Global Orchestration
+resource "aws_sns_topic_subscription" "cw_alarm_to_global_orchestration" {
+  topic_arn              = module.sns_topic_cw_alarm.arn
+  protocol               = "https"
+  endpoint               = "${var.pagerduty_global_integration_url}${module.global_orchestration.result.integration_key}"
+  endpoint_auto_confirms = true
+}
+
 # Service Integration "CloudWatch"
 resource "aws_sns_topic_subscription" "cw_alarm_to_service_integration_cloudwatch" {
   topic_arn              = module.sns_topic_cw_alarm.arn
   protocol               = "https"
   endpoint               = "${var.pagerduty_service_integration_url}${pagerduty_service_integration.cloudwatch.integration_key}${var.pagerduty_service_integration_url_slug}"
-  endpoint_auto_confirms = true
-}
-
-# Global Orchestration
-resource "aws_sns_topic_subscription" "cw_alarm_to_global_orchestration" {
-  topic_arn              = module.sns_topic_cw_alarm.arn
-  protocol               = "https"
-  endpoint               = "${var.pagerduty_global_integration_url}${module.global_orchestration_cw_alarm.result.integration_key}"
   endpoint_auto_confirms = true
 }
 
@@ -74,4 +74,20 @@ resource "aws_sns_topic_subscription" "eventbridge_to_integration_custom_event_t
   protocol               = "https"
   endpoint               = module.pagerduty_service_integration_custom_event_transfer_sns.integration_url
   endpoint_auto_confirms = false
+}
+
+# Global Ruleset
+resource "aws_sns_topic_subscription" "eventbridge_to_global_ruleset" {
+  topic_arn              = module.sns_topic_eventbridge.arn
+  protocol               = "https"
+  endpoint               = "${var.pagerduty_global_integration_url}${data.pagerduty_ruleset.global.routing_keys[0]}"
+  endpoint_auto_confirms = true
+}
+
+# Global Orchestration
+resource "aws_sns_topic_subscription" "eventbridge_to_global_orchestration" {
+  topic_arn              = module.sns_topic_eventbridge.arn
+  protocol               = "https"
+  endpoint               = "${var.pagerduty_global_integration_url}${module.global_orchestration.result.integration_key}"
+  endpoint_auto_confirms = true
 }
