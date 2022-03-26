@@ -1,3 +1,27 @@
+/**
+ * # pagerduty-service-custom-event-transfer
+ *
+ * Create a "Custom Event Transformer" in PargerDuty Service.
+ *
+ * `pagerduty_service_integration` does not support advanced options, so it execute PagerDuty API.
+ * - ref.
+ *   - [API Reference \| PagerDuty Developer Documentation](https://developer.pagerduty.com/api-reference)
+ *   - (similar issue) [\[Feature Request\] Allow pagerduty\_service\_integration to modify CloudWatch "Correlate events by" and "Derive name from" options · Issue \#260 · PagerDuty/terraform\-provider\-pagerduty · GitHub](https://github.com/PagerDuty/terraform-provider-pagerduty/issues/260)
+ */
+
+terraform {
+  required_providers {
+    pagerduty = {
+      source  = "pagerduty/pagerduty"
+      version = "~> 2.3"
+    }
+    null = {
+      source = "hashicorp/null"
+      version = "~> 3.1"
+    }
+  }
+}
+
 data "pagerduty_vendor" "custom_event_transformer" {
   name = "Custom Event Transformer"
 }
@@ -19,8 +43,6 @@ locals {
   })
 }
 
-# pagerduty_service_integration does not support advanced options
-# ref. (similar issue) [\[Feature Request\] Allow pagerduty\_service\_integration to modify CloudWatch "Correlate events by" and "Derive name from" options · Issue \#260 · PagerDuty/terraform\-provider\-pagerduty · GitHub](https://github.com/PagerDuty/terraform-provider-pagerduty/issues/260)
 resource "null_resource" "pagerduty_service_integration_config" {
   triggers = {
     config_data = local.config_data

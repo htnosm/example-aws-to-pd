@@ -1,17 +1,42 @@
 # example-aws-to-pd
 Example of notification from AWS to PD
 
-## Installation
+## Requirements
 
-```
-terraform init
-```
+- Terraform 1.1.7+
+- bash, curl
 
 ## Usage
 
 ```
+terraform init
+
 terraform plan
 terraform apply
+```
+
+### Note
+
+You need an environment that can connect to AWS and PagerDuty.
+
+#### AWS
+
+Add the connection information to the environment variable.
+
+```
+# e.g.
+export AWS_PROFILE=""
+```
+
+#### PagerDuty
+
+Set PagerDuty API Token to `pagerduty_token`.
+
+```
+# e.g.
+cat <<EOF > terraform.tfvars
+pagerduty_token = ""
+EOF
 ```
 
 ### "Event Orchestration Action" needs to be edit manualy

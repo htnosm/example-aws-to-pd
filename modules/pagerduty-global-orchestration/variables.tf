@@ -4,7 +4,6 @@ variable "pagerduty_token" {
 }
 
 /*
-# https://developer.pagerduty.com/api-reference/b3A6MzU3MDU0Mzc-create-an-orchestration
 {
   "orchestration": {
     "name": "New Orchestration",
@@ -32,7 +31,6 @@ variable "team_id" {
 }
 
 /*
-# https://developer.pagerduty.com/api-reference/b3A6MzU3MDU0Mzc-create-an-orchestration
 {
   "orchestration_path": {
     "sets": [

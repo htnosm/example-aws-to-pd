@@ -1,5 +1,27 @@
-# event_orchestrations does not support
-# ref. [Add support for event\_orchestrations API · Issue \#465](https://github.com/PagerDuty/terraform-provider-pagerduty/issues/465)
+/**
+ * # pagerduty-service-custom-event-transfer
+ *
+ * Create a "Custom Event Transformer" in PargerDuty Service.
+ *
+ * `event_orchestrations` does not support, so it execute PagerDuty API.
+ * - ref.
+ *   - [API Reference \| PagerDuty Developer Documentation](https://developer.pagerduty.com/api-reference)
+ *   - [Add support for event\_orchestrations API · Issue \#465](https://github.com/PagerDuty/terraform-provider-pagerduty/issues/465)
+ */
+
+terraform {
+  required_providers {
+    null = {
+      source = "hashicorp/null"
+      version = "~> 3.1"
+    }
+    external = {
+      source = "hashicorp/external"
+      version = "~> 2.2"
+    }
+  }
+}
+
 locals {
   global_orchestration = {
     orchestration = {

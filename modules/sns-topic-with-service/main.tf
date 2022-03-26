@@ -1,14 +1,15 @@
 /**
  * # sns-topic-with-service
  *
- * Resources:
- *  - SNS Topic
- *  - SNS Topic Policy
+ * SNS topic for aws service publishing events.
  */
 
 terraform {
   required_providers {
-    aws = {}
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.5"
+    }
   }
 }
 
