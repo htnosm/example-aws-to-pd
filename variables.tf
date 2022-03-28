@@ -42,6 +42,12 @@ variable "pagerduty_service_integration_url_slug" {
   default     = "/enqueue"
 }
 
+variable "elable_subscription" {
+  description = "Enable notifications to PagerDuty."
+  type = bool
+  default = false
+}
+
 variable "trigger_list_bucket_call_count" {
   default = false
 }

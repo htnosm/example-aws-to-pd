@@ -10,6 +10,7 @@ locals {
 resource "pagerduty_ruleset_rule" "global_cw_alarm" {
   ruleset  = local.ruleset_slug
   disabled = "false"
+  position = 0
 
   conditions {
     operator = "and"
@@ -35,6 +36,7 @@ resource "pagerduty_ruleset_rule" "global_cw_alarm" {
 resource "pagerduty_ruleset_rule" "global_eventbridge" {
   ruleset  = local.ruleset_slug
   disabled = "false"
+  position = 1
 
   conditions {
     operator = "and"

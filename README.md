@@ -13,6 +13,9 @@ terraform init
 
 terraform plan
 terraform apply
+
+# Enable notifications to PagerDuty
+terraform apply -var='elable_subscription=true'
 ```
 
 ### Note
