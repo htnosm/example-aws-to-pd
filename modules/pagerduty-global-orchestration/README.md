@@ -1,6 +1,6 @@
-# pagerduty-service-custom-event-transfer
+# pagerduty-global-orchestration
 
-Create a "Custom Event Transformer" in PargerDuty Service.
+Create a "Global Event Orchestration".
 
 `event_orchestrations` does not support, so it execute PagerDuty API.
 - ref.
