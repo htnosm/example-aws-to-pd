@@ -44,8 +44,8 @@ variable "pagerduty_service_integration_url_slug" {
 
 variable "elable_subscription" {
   description = "Enable notifications to PagerDuty."
-  type = bool
-  default = false
+  type        = bool
+  default     = false
 }
 
 variable "trigger_list_bucket_call_count" {

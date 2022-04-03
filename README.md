@@ -42,11 +42,6 @@ pagerduty_token = ""
 EOF
 ```
 
-### "Event Orchestration Action" needs to be edit manualy
-
-- Go to output `global_orchestration_cw_alarm_html_url`
-- Select the target Route and edit it with the visual editor
-
 ## Trigger
 
 ```

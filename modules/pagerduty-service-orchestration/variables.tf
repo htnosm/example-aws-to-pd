@@ -56,8 +56,35 @@ variable "rule_id" {
 }
 
 variable "rules" {
-  description = "The Service Orchestration evaluates Events sent to this Service against each of its rules, beginning with the rules in the \"start\" set."
-  type        = list(any)
+  description = <<-EOT
+  The Service Orchestration evaluates Events sent to this Service against each of its rules,
+  beginning with the rules in the "start" set.
+
+  Optional:
+  [
+    {
+      label = string
+      conditions = [
+        {
+          expression = string,
+        },
+      ]
+      actions = {
+        route_to           = string
+        suppress           = bool
+        suspend            = number
+        priority           = string
+        annotate           = string
+        severity           = string
+        event_action       = string
+        automation_actions = list(object)
+        variables          = list(object)
+        extractions        = list(object)
+      }
+      disabled = bool
+    },
+  ]
+  EOT
   default     = []
 }
 

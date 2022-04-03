@@ -56,5 +56,42 @@ resource "pagerduty_ruleset_rule" "global_eventbridge" {
     severity {
       value = "info"
     }
+
+    extractions {
+      target   = "summary"
+      template = "{{topic_name}}: {{detail_type}}"
+    }
+    extractions {
+      target   = "dedup_key"
+      template = "{{message_id}}"
+    }
+  }
+
+  variable {
+    name = "topic_name"
+    type = "regex"
+
+    parameters {
+      path  = "TopicArn"
+      value = "^.*:(.*)"
+    }
+  }
+  variable {
+    name = "detail_type"
+    type = "regex"
+
+    parameters {
+      path  = "Message"
+      value = "^.*\"detail-type\":\"([^\"]*)\".*$"
+    }
+  }
+  variable {
+    name = "message_id"
+    type = "regex"
+
+    parameters {
+      path  = "MessageId"
+      value = "(.*)"
+    }
   }
 }
