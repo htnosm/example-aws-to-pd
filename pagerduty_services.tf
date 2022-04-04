@@ -52,3 +52,31 @@ resource "pagerduty_service" "example_orchestration" {
     urgency = "severity_based"
   }
 }
+
+resource "pagerduty_service" "example_rulesets_email" {
+  name                    = "${var.resource_prefix}-rulesets-email"
+  description             = "Managed by Terraform, with Rulesets"
+  auto_resolve_timeout    = "null" # Disabled if set to the "null"
+  acknowledgement_timeout = "null" # Disabled if set to the "null"
+  escalation_policy       = data.pagerduty_escalation_policy.example.id
+  alert_creation          = "create_alerts_and_incidents"
+
+  incident_urgency_rule {
+    type    = "constant"
+    urgency = "severity_based"
+  }
+}
+
+resource "pagerduty_service" "example_orchestration_email" {
+  name                    = "${var.resource_prefix}-orchestration-email"
+  description             = "Managed by Terraform, with Event Orchestration"
+  auto_resolve_timeout    = "null" # Disabled if set to the "null"
+  acknowledgement_timeout = "null" # Disabled if set to the "null"
+  escalation_policy       = data.pagerduty_escalation_policy.example.id
+  alert_creation          = "create_alerts_and_incidents"
+
+  incident_urgency_rule {
+    type    = "constant"
+    urgency = "severity_based"
+  }
+}

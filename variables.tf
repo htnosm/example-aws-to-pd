@@ -48,6 +48,27 @@ variable "elable_subscription" {
   default     = false
 }
 
+variable "elable_subscriptions" {
+  description = "Enable notifications to PagerDuty."
+  type        = map(bool)
+  default     = {
+    cw_alarm_to_service_integration_cloudwatch = false
+    cw_alarm_to_global_ruleset = false
+    cw_alarm_to_global_orchestration = false
+    eventbridge_to_integration_email = false
+    eventbridge_to_integration_email_json = false
+    eventbridge_to_integration_custom_event_transfer = false
+    eventbridge_to_integration_custom_event_transfer_v2 = false
+    eventbridge_to_integration_custom_event_transfer_sns = false
+    eventbridge_to_global_ruleset = false
+    eventbridge_to_global_orchestration = false
+    eventbridge_to_global_ruleset_email = false
+    eventbridge_to_global_ruleset_email_json = false
+    eventbridge_to_global_orchestration_email = false
+    eventbridge_to_global_orchestration_email_json = false
+  }
+}
+
 variable "trigger_list_bucket_call_count" {
   default = false
 }

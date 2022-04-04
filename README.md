@@ -15,7 +15,7 @@ terraform plan
 terraform apply
 
 # Enable notifications to PagerDuty
-terraform apply -var='elable_subscription=true'
+# Set each element value of ${var.elable_subscriptions} to true (ref. variables.tf)
 ```
 
 ### Note

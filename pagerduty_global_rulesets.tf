@@ -95,3 +95,101 @@ resource "pagerduty_ruleset_rule" "global_eventbridge" {
     }
   }
 }
+
+resource "pagerduty_ruleset_rule" "global_eventbridge_email" {
+  ruleset  = local.ruleset_slug
+  disabled = "false"
+  position = 2
+
+  conditions {
+    operator = "and"
+    subconditions {
+      operator = "equals"
+      parameter {
+        path  = "headers.subject"
+        value = "AWS Notification Message"
+      }
+    }
+    subconditions {
+      operator = "contains"
+      parameter {
+        path  = "body"
+        value = "?SubscriptionArn=${module.sns_topic_eventbridge.arn}:"
+      }
+    }
+  }
+
+  actions {
+    route {
+      value = pagerduty_service.example_rulesets_email.id
+    }
+
+    extractions {
+      target   = "summary"
+      template = "Email: Tag Change on Resource"
+    }
+    extractions {
+      target   = "dedup_key"
+      template = "{{message_id}}"
+    }
+  }
+
+  variable {
+    name = "message_id"
+    type = "regex"
+
+    parameters {
+      path  = "body"
+      value = "^.*\"id\":\"([^\"]*)\".*$"
+    }
+  }
+}
+
+resource "pagerduty_ruleset_rule" "global_eventbridge_email_json" {
+  ruleset  = local.ruleset_slug
+  disabled = "false"
+  position = 3
+
+  conditions {
+    operator = "and"
+    subconditions {
+      operator = "equals"
+      parameter {
+        path  = "headers.subject"
+        value = "AWS Notification Message"
+      }
+    }
+    subconditions {
+      operator = "contains"
+      parameter {
+        path  = "body"
+        value = "\"TopicArn\" : \"${module.sns_topic_eventbridge.arn}\""
+      }
+    }
+  }
+
+  actions {
+    route {
+      value = pagerduty_service.example_rulesets.id
+    }
+
+    extractions {
+      target   = "summary"
+      template = "Email-JSON: Tag Change on Resource"
+    }
+    extractions {
+      target   = "dedup_key"
+      template = "{{message_id}}"
+    }
+  }
+
+  variable {
+    name = "message_id"
+    type = "regex"
+
+    parameters {
+      path  = "body"
+      value = "^.*\"MessageId\" : \"([^\"]*)\".*$"
+    }
+  }
+}
