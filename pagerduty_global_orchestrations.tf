@@ -32,7 +32,7 @@ module "global_orchestration" {
       conditions = [
         # EventBridge Email
         {
-          expression = "event.custom_details.plain_body matches part '?SubscriptionArn=${module.sns_topic_eventbridge.arn}:'",
+          expression = "event.custom_details.subject matches 'AWS Notification Message' and event.custom_details.plain_body matches part '?SubscriptionArn=${module.sns_topic_eventbridge.arn}:'",
         },
       ]
       actions = {

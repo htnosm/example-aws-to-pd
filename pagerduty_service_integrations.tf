@@ -34,6 +34,7 @@ resource "pagerduty_service_integration" "email" {
   integration_email = "${pagerduty_service.example.name}-email.${random_string.email.result}@${local.pagerduty_email_domain}"
 }
 
+# integration_email is the unique fully-qualified email address used for routing emails to this integration for processing.
 resource "random_string" "email_json" {
   length  = 8
   special = false

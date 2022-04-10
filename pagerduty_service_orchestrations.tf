@@ -99,7 +99,7 @@ module "service_orchestration" {
           },
           {
             target   = "event.dedup_key"
-            template = "{{variables.message_id}}"
+            template = "Email-JSON {{variables.message_id}}"
           },
         ]
       }
@@ -166,7 +166,7 @@ module "service_orchestration_email" {
           },
           {
             target   = "event.dedup_key"
-            template = "{{variables.message_id}}"
+            template = "Email {{variables.message_id}}"
           },
         ]
       }

@@ -130,7 +130,7 @@ resource "pagerduty_ruleset_rule" "global_eventbridge_email" {
     }
     extractions {
       target   = "dedup_key"
-      template = "{{message_id}}"
+      template = "Email {{message_id}}"
     }
   }
 
@@ -179,7 +179,7 @@ resource "pagerduty_ruleset_rule" "global_eventbridge_email_json" {
     }
     extractions {
       target   = "dedup_key"
-      template = "{{message_id}}"
+      template = "Email-JSON {{message_id}}"
     }
   }
 
