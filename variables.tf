@@ -60,12 +60,15 @@ variable "elable_subscriptions" {
     eventbridge_to_integration_custom_event_transfer     = false
     eventbridge_to_integration_custom_event_transfer_v2  = false
     eventbridge_to_integration_custom_event_transfer_sns = false
+    eventbridge_to_integration_events_api_v2             = false
     eventbridge_to_global_ruleset                        = false
     eventbridge_to_global_orchestration                  = false
     eventbridge_to_global_ruleset_email                  = false
     eventbridge_to_global_ruleset_email_json             = false
     eventbridge_to_global_orchestration_email            = false
     eventbridge_to_global_orchestration_email_json       = false
+    eventbridge_to_global_ruleset_lambda                 = false
+    eventbridge_to_global_orchestration_lambda           = false
   }
 }
 

@@ -193,3 +193,26 @@ resource "pagerduty_ruleset_rule" "global_eventbridge_email_json" {
     }
   }
 }
+
+resource "pagerduty_ruleset_rule" "global_eventbridge_lambda" {
+  ruleset  = local.ruleset_slug
+  disabled = "false"
+  position = 4
+
+  conditions {
+    operator = "and"
+    subconditions {
+      operator = "equals"
+      parameter {
+        path  = "payload.source"
+        value = module.sns_topic_eventbridge.arn
+      }
+    }
+  }
+
+  actions {
+    route {
+      value = pagerduty_service.example_rulesets.id
+    }
+  }
+}

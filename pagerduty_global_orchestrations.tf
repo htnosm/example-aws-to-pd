@@ -22,6 +22,10 @@ module "global_orchestration" {
         {
           expression = "event.custom_details.subject matches 'AWS Notification Message' and event.custom_details.plain_body matches part '\"TopicArn\" : \"${module.sns_topic_eventbridge.arn}\"'",
         },
+        # Lambda
+        {
+          expression = "event.source matches '${module.sns_topic_eventbridge.arn}'",
+        },
       ]
       actions = {
         route_to = pagerduty_service.example_orchestration.id

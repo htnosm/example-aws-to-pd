@@ -77,3 +77,12 @@ module "pagerduty_service_integration_custom_event_transfer_sns" {
   integration_name = "Custom Event Transformer(SNS)"
   source_code_path = "modules/pagerduty-service-custom-event-transfer/templates/amazon_sns.js"
 }
+
+##########
+# Events API v2
+##########
+resource "pagerduty_service_integration" "events_api_v2" {
+  service = pagerduty_service.example.id
+  name    = "Events API v2"
+  type    = "events_api_v2_inbound_integration"
+}

@@ -84,6 +84,15 @@ resource "aws_sns_topic_subscription" "eventbridge_to_integration_custom_event_t
   endpoint_auto_confirms = false
 }
 
+# Service Integration "Custom Event Transformer"
+resource "aws_sns_topic_subscription" "eventbridge_to_integration_events_api_v2" {
+  count                  = var.elable_subscriptions.eventbridge_to_integration_events_api_v2 ? 1 : 0
+  topic_arn              = module.sns_topic_eventbridge.arn
+  protocol               = "lambda"
+  endpoint               = module.lambda_events_api_v2.function_arn
+  endpoint_auto_confirms = true
+}
+
 # Global Ruleset
 resource "aws_sns_topic_subscription" "eventbridge_to_global_ruleset" {
   count                  = var.elable_subscriptions.eventbridge_to_global_ruleset ? 1 : 0
@@ -132,4 +141,22 @@ resource "aws_sns_topic_subscription" "eventbridge_to_global_orchestration_email
   protocol               = "email-json"
   endpoint               = "${module.global_orchestration.result.integration_key}@${local.pagerduty_email_domain}"
   endpoint_auto_confirms = false
+}
+
+# Global Ruleset (API)
+resource "aws_sns_topic_subscription" "eventbridge_to_global_ruleset_lambda" {
+  count                  = var.elable_subscriptions.eventbridge_to_global_ruleset_lambda ? 1 : 0
+  topic_arn              = module.sns_topic_eventbridge.arn
+  protocol               = "lambda"
+  endpoint               = module.lambda_global_ruleset.function_arn
+  endpoint_auto_confirms = true
+}
+
+# Global Orchestration (API)
+resource "aws_sns_topic_subscription" "eventbridge_to_global_orchestration_lambda" {
+  count                  = var.elable_subscriptions.eventbridge_to_global_orchestration_lambda ? 1 : 0
+  topic_arn              = module.sns_topic_eventbridge.arn
+  protocol               = "lambda"
+  endpoint               = module.lambda_global_orchestration.function_arn
+  endpoint_auto_confirms = true
 }

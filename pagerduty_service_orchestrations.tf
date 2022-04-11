@@ -104,6 +104,16 @@ module "service_orchestration" {
         ]
       }
     },
+    # Lambda
+    {
+      label = null,
+      conditions = [
+        {
+          expression = "event.source matches '${module.sns_topic_eventbridge.arn}'",
+        },
+      ],
+      actions = {}
+    },
     # resolve
     {
       label = null,
