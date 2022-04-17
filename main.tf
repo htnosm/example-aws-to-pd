@@ -1,26 +1,33 @@
+/**
+ * # example-aws-to-pd
+ *
+ * Example of notification from AWS to PagerDuty
+ *
+ */
+
 terraform {
   backend "local" {
     path = "./terraform.tfstate"
   }
 
-  required_version = ">= 1.1.7"
+  required_version = "~> 1.1.7"
 
   required_providers {
     pagerduty = {
       source  = "pagerduty/pagerduty"
-      version = ">= 2.3"
+      version = "~> 2.3.0"
     }
     aws = {
       source  = "hashicorp/aws"
-      version = ">= 4.5"
+      version = "~> 4.5.0"
     }
     null = {
       source  = "hashicorp/null"
-      version = ">= 3.1"
+      version = "~> 3.1.1"
     }
     random = {
       source  = "hashicorp/random"
-      version = ">= 3.1"
+      version = "~> 3.1.2"
     }
   }
 }

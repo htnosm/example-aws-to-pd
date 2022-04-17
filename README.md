@@ -1,12 +1,14 @@
 # example-aws-to-pd
-Example of notification from AWS to PD
+Example of notification from AWS to PagerDuty
 
 ## Requirements
 
-- Terraform 1.1.7+
+- Terraform 1.1.7
 - bash, curl
 
 ## Usage
+
+- See [RESOURCES.md](./RESOURCES.md) for creation resources
 
 ```
 terraform init
